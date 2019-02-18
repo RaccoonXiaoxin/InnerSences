@@ -1,77 +1,98 @@
+
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8" />
-<meta name="description" content="" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Windows 注册表使用与相关操作 | ThinkSpace</title>
+    
+<meta charset="utf-8" >
+
+<title>Windows 注册表使用与相关操作 | InnerSences</title>
+<meta name="description" content="我日常看到的一些内容和自己的一些想法">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
 <link rel="shortcut icon" href="https://raccoonxiaoxin.github.io/InnerSences/favicon.ico">
 <link rel="stylesheet" href="https://raccoonxiaoxin.github.io/InnerSences/styles/main.css">
 
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
 
 
   </head>
   <body>
-    <div class="main">
-      <div class="main-content">
-        <div class="site-header">
-  <a href="https://raccoonxiaoxin.github.io/InnerSences">
-  <img class="avatar" src="https://raccoonxiaoxin.github.io/InnerSences/images/avatar.png" alt="" width="80px" height="80px">
-  </a>
-  <h1 class="site-title">
-    ThinkSpace
-  </h1>
-  <p class="site-description">
-    我日常看到的一些内容和自己的一些想法
-  </p>
-  <div class="menu-container">
-    
-      
-        <a href="https://raccoonxiaoxin.github.io/InnerSences" class="menu">
-          首页
-        </a>
-      
-    
-      
-        <a href="https://raccoonxiaoxin.github.io/InnerSences/tags" class="menu">
-          标签
-        </a>
-      
-    
-      
-        <a href="https://raccoonxiaoxin.github.io/InnerSences/archives" class="menu">
-          归档
-        </a>
-      
-    
-      
-        <a href="https://raccoonxiaoxin.github.io/InnerSences/post/about/" class="menu">
-          关于
-        </a>
-      
-    
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://raccoonxiaoxin.github.io/InnerSences">
+        <img class="avatar" src="https://raccoonxiaoxin.github.io/InnerSences/images/avatar.png" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://raccoonxiaoxin.github.io/InnerSences">
+        <h1 class="site-title">InnerSences</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
   </div>
 </div>
 
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
       
+        
+          <a href="https://raccoonxiaoxin.github.io/InnerSences" class="menu purple-link">
+            首页
+          </a>
+        
+      
+        
+          <a href="https://raccoonxiaoxin.github.io/InnerSences/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+        
+          <a href="https://raccoonxiaoxin.github.io/InnerSences/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+        
+          <a href="https://raccoonxiaoxin.github.io/InnerSences/post/about/" class="menu purple-link">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
         <div class="post-detail">
-          <article class="post">
-            <h2 class="post-title">
-              Windows 注册表使用与相关操作
-            </h2>
-            <div class="post-info">
-              <time class="post-time">
-                · 2019-02-16 ·
-              </time>
-              
-                <a href="https://raccoonxiaoxin.github.io/InnerSences/tag/windows" class="post-tags">
-                  # Windows
-                </a>
-              
-            </div>
-            <div class="post-content">
-              <p>日常注册表的使用，帮助 Windows 10 系统更加好用！<!-- more --></p>
+          <h2 class="post-title">Windows 注册表使用与相关操作</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2019-02-15</span>
+            
+              <span>
+                <i class="icon-pricetags-outline"></i>
+                
+                  <a href="https://raccoonxiaoxin.github.io/InnerSences/tag/windows">
+                    Windows
+                    
+                  </a>
+                
+              </span>
+            
+          </div>
+          <div class="post-content">
+            <p>日常注册表的使用，帮助 Windows 10 系统更加好用！<!-- more --></p>
 <h3 id="-windows-10-"><strong>一、调整 Windows 10「菜单」视觉效果显示速度延迟</strong></h3>
 <p>Windows 10 系统中有一系列的动画视觉效果，能够让用户的 UI 体验更加流畅，其中一项就包括打开「菜单」时的平滑过渡延迟效果。对绝大多数用户来说，系统默认设置都是比较理想的，不过您还是可以通过调整「注册表」来进一步加速「菜单」视觉效果延迟，让其感觉起来更加快速。<br><code>HKEYCURRENTUSER\Control Panel\Desktop</code><br>修改右侧 MenuShowDelay 键值，默认 400 毫秒。<br>若要加快动画速度，使用小于 400 的数值，如 75、100 或 125 等，值设置为 0 时，将完全禁用菜单视觉效果。<br>若要减慢动画效果速度，请使用大于 400 的值，但最大不超过 4000。<br>值设置好后重启计算机。</p>
 <h3 id="-windows-10-"><strong>二、关闭 Windows 10 两分钟后自动进入睡眠</strong></h3>
@@ -118,32 +139,45 @@ REG DELETE HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\M
 REG DELETE HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{A3597333-B5F3-4CB0-9C11-562672709357} /F</code></pre><h3 id="-windows-10-c-7-gb-"><strong>八、关闭 Windows 10 默认 C 盘保留 7 GB 空间用于更新</strong></h3>
 <p><code>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\ReserveManager</code><br>右侧 ShippedWithReserves 的键值从 0 改成 1</p>
 
-            </div>
-          </article>
+          </div>
         </div>
-    
+
         
           <div class="next-post">
-            <div class="next">下一篇</div>
-            <a href="https://raccoonxiaoxin.github.io/InnerSences/post/kms-address">
+            <a class="purple-link" href="https://raccoonxiaoxin.github.io/InnerSences/post/kms-address">
               <h3 class="post-title">
-                KMS 地址
+                下一篇：KMS 地址
               </h3>
             </a>
-          </div>  
-        
+          </div>
+          
+      </div>
 
-        
-    
-        <div class="site-footer">
-  Powered by Hve Notes
+      
+
+      <div class="site-footer">
+  <div class="slogan">我日常看到的一些内容和自己的一些想法</div>
+  Designed & Writen by Raccoon
+Powered by Hve Notes
 </div>
 
-<script>
-  hljs.initHighlightingOnLoad()
+
+    </div>
+    <script type="application/javascript">
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
 </script>
 
-      </div>
-    </div>
+
+
+
   </body>
 </html>
