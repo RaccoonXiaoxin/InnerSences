@@ -1,0 +1,148 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Windows 注册表使用与相关操作 | ThinkSpace</title>
+<link rel="shortcut icon" href="https://raccoonxiaoxin.github.io/InnerSences/favicon.ico">
+<link rel="stylesheet" href="https://raccoonxiaoxin.github.io/InnerSences/styles/main.css">
+
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+
+
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://raccoonxiaoxin.github.io/InnerSences">
+  <img class="avatar" src="https://raccoonxiaoxin.github.io/InnerSences/images/avatar.png" alt="" width="80px" height="80px">
+  </a>
+  <h1 class="site-title">
+    ThinkSpace
+  </h1>
+  <p class="site-description">
+    我日常看到的一些内容和自己的一些想法
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="https://raccoonxiaoxin.github.io/InnerSences" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="https://raccoonxiaoxin.github.io/InnerSences/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="https://raccoonxiaoxin.github.io/InnerSences/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="https://raccoonxiaoxin.github.io/InnerSences/post/about/" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+</div>
+
+      
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              Windows 注册表使用与相关操作
+            </h2>
+            <div class="post-info">
+              <time class="post-time">
+                · 2019-02-18 ·
+              </time>
+              
+                <a href="https://raccoonxiaoxin.github.io/InnerSences/tag/windows" class="post-tags">
+                  # Windows
+                </a>
+              
+            </div>
+            <div class="post-content">
+              <h3 id="-windows-10-"><strong>一、调整 Windows 10「菜单」视觉效果显示速度延迟</strong></h3>
+<p>Windows 10 系统中有一系列的动画视觉效果，能够让用户的 UI 体验更加流畅，其中一项就包括打开「菜单」时的平滑过渡延迟效果。对绝大多数用户来说，系统默认设置都是比较理想的，不过您还是可以通过调整「注册表」来进一步加速「菜单」视觉效果延迟，让其感觉起来更加快速。<br><code>HKEYCURRENTUSER\Control Panel\Desktop</code><br>修改右侧 MenuShowDelay 键值，默认 400 毫秒。<br>若要加快动画速度，使用小于 400 的数值，如 75、100 或 125 等，值设置为 0 时，将完全禁用菜单视觉效果。<br>若要减慢动画效果速度，请使用大于 400 的值，但最大不超过 4000。<br>值设置好后重启计算机。</p>
+<h3 id="-windows-10-"><strong>二、关闭 Windows 10 两分钟后自动进入睡眠</strong></h3>
+<p><code>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\238C9FA8-0AAD-41ED-83F4-97BE242C8F20\7bc4a2f9-d8fc-4469-b07b-33eb785aaca0</code><br>修改右侧 Attributes 键值，将数值数据由默认值 1 修改为 2 ，确定。<br>电源选项中的 “更改高级电源设置” 即可打开 “电源选项 - 高级设置” 窗口。点击 + 号展开 “睡眠”，即可看到“无人参与系统睡眠超时” 设置项，默认 2 分钟修改为一个较大的数值，起码不小于你在 “Windows 设置 － 系统 － 电源和睡眠” 设置的睡眠超时时间即可。</p>
+<h3 id="-windows-10-windows-"><strong>三、Windows 10 内测版本改为“跳到下一个 Windows 版本”</strong></h3>
+<p><code>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsSelfHost\Applicability</code><br>右侧 ContentType 的键值从 Active 改成 Skip</p>
+<h3 id="-"><strong>四、远程桌面</strong></h3>
+<p><code>HKEY_CURRENT_USER\Software\Microsoft\Terminal Server Client</code></p>
+<h3 id="-"><strong>五、恢复照片查看器打开图片文件</strong></h3>
+<pre><code>reg add &quot;HKLM\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations&quot; /v &quot;.jpg&quot; /t REG_SZ /d PhotoViewer.FileAssoc.Tiff /f
+reg add &quot;HKLM\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations&quot; /v &quot;.jpeg&quot; /t REG_SZ /d PhotoViewer.FileAssoc.Tiff /f
+reg add &quot;HKLM\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations&quot; /v &quot;.bmp&quot; /t REG_SZ /d PhotoViewer.FileAssoc.Tiff /f
+reg add &quot;HKLM\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations&quot; /v &quot;.png&quot; /t REG_SZ /d PhotoViewer.FileAssoc.Tiff /f</code></pre><p>其他图片类型可以类似增加</p>
+<h3 id="-"><strong>六、恢复音量合成器旧版样式</strong></h3>
+<pre><code>reg add &quot;HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\MTCUVC&quot;
+reg add &quot;HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\MTCUVC&quot; /v EnableMTCUVC /t REG_DWORD /d 0</code></pre><h3 id="-"><strong>七、删除“此电脑”主界面和弹窗界面上方的快捷方式</strong></h3>
+<p>::此电脑 打开后上方的文件夹</p>
+<pre><code>REG DELETE HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{088e3905-0323-4b02-9826-5d99428e115f} /F
+REG DELETE HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A} /F
+REG DELETE HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{1CF1260C-4DD0-4ebb-811F-33C572699FDE} /F
+REG DELETE HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{24ad3ad4-a569-4530-98e1-ab02f9417aa8} /F
+REG DELETE HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{374DE290-123F-4565-9164-39C4925E467B} /F
+REG DELETE HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{3ADD1653-EB32-4cb0-BBD7-DFA0ABB5ACCA} /F
+REG DELETE HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{3dfdf296-dbec-4fb4-81d1-6a3438bcf4de} /F
+REG DELETE HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{A0953C92-50DC-43bf-BE83-3742FED03C9C} /F
+REG DELETE HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{A8CDFF1C-4878-43be-B5FD-F8091C1C60D0} /F
+REG DELETE HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641} /F
+REG DELETE HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{d3162b92-9365-467a-956b-92703aca08af} /F
+REG DELETE HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{f86fa3ab-70d2-4fc7-9c99-fcbf05467f3a} /F
+REG DELETE HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{814A7798-63FB-42A6-BD9C-EDE1843A0106} /F</code></pre><p>::选择文件路径的弹窗界面</p>
+<pre><code>REG DELETE HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{088e3905-0323-4b02-9826-5d99428e115f} /F
+REG DELETE HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A} /F
+REG DELETE HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{1CF1260C-4DD0-4ebb-811F-33C572699FDE} /F
+REG DELETE HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{24ad3ad4-a569-4530-98e1-ab02f9417aa8} /F
+REG DELETE HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{374DE290-123F-4565-9164-39C4925E467B} /F
+REG DELETE HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{3ADD1653-EB32-4cb0-BBD7-DFA0ABB5ACCA} /F
+REG DELETE HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{3dfdf296-dbec-4fb4-81d1-6a3438bcf4de} /F
+REG DELETE HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{A0953C92-50DC-43bf-BE83-3742FED03C9C} /F
+REG DELETE HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{A8CDFF1C-4878-43be-B5FD-F8091C1C60D0} /F
+REG DELETE HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641} /F
+REG DELETE HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{d3162b92-9365-467a-956b-92703aca08af} /F
+REG DELETE HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{f86fa3ab-70d2-4fc7-9c99-fcbf05467f3a} /F
+REG DELETE HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{814A7798-63FB-42A6-BD9C-EDE1843A0106} /F
+REG DELETE HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{A3597333-B5F3-4CB0-9C11-562672709357} /F</code></pre><h3 id="-windows-10-c-7-gb-"><strong>八、关闭 Windows 10 默认 C 盘保留 7 GB 空间用于更新</strong></h3>
+<p><code>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\ReserveManager</code><br>右侧 ShippedWithReserves 的键值从 0 改成 1</p>
+
+            </div>
+          </article>
+        </div>
+    
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://raccoonxiaoxin.github.io/InnerSences/post/kms-address">
+              <h3 class="post-title">
+                KMS 地址
+              </h3>
+            </a>
+          </div>  
+        
+
+        
+    
+        <div class="site-footer">
+  Powered by Hve Notes
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+      </div>
+    </div>
+  </body>
+</html>
