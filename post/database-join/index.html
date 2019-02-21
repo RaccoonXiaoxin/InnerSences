@@ -1,0 +1,114 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>数据库表连接的简单解释 | Raccoon&#39;s Inner Sences</title>
+<link rel="shortcut icon" href="https://raccoonxiaoxin.github.io/InnerSences/favicon.ico">
+<link rel="stylesheet" href="https://raccoonxiaoxin.github.io/InnerSences/styles/main.css">
+
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+
+
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://raccoonxiaoxin.github.io/InnerSences">
+  <img class="avatar" src="https://raccoonxiaoxin.github.io/InnerSences/images/avatar.png" alt="" width="80px" height="80px">
+  </a>
+  <h1 class="site-title">
+    Raccoon&#39;s Inner Sences
+  </h1>
+  <p class="site-description">
+    <h4>我日常看到的一些内容和自己的一些想法</h4>
+</br>
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="https://raccoonxiaoxin.github.io/InnerSences" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="https://raccoonxiaoxin.github.io/InnerSences/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="https://raccoonxiaoxin.github.io/InnerSences/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="https://raccoonxiaoxin.github.io/InnerSences/post/about/" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+</div>
+
+      
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              数据库表连接的简单解释
+            </h2>
+            <div class="post-info">
+              <time class="post-time">
+                · 2019-02-18 ·
+              </time>
+              
+                <a href="https://raccoonxiaoxin.github.io/InnerSences/tag/database" class="post-tags">
+                  # Database
+                </a>
+              
+            </div>
+            <div class="post-content">
+              <p>关系型数据库最难的地方，就是建模（model）。错综复杂的数据，需要建立模型，才能储存在数据库。所谓 &quot;模型&quot; 就是两样东西：实体（entity）+ 关系（relationship）。<br>实体指的是那些实际的对象，带有自己的属性，可以理解成一组相关属性的容器。<br>关系就是实体之间的联系，通常可以分成 &quot;一对一&quot;、&quot;一对多&quot; 和 &quot;多对多&quot; 等类型。<br>在关系型数据库里面，每个实体有自己的一张表（table），所有属性都是这张表的字段（field），表与表之间根据关联字段 &quot;连接&quot;（join）在一起。所以，表的连接是关系型数据库的核心问题。</p>
+<p>所谓 &quot;连接&quot;，就是两张表根据关联字段，组合成一个数据集。<br>连接分为内连接和外连接。左连接、右连接、全连接都属于外连接。<br>表的连接对应的记录情况如下：</p>
+<ul>
+<li>内连接（inner join）只返回两张表匹配的记录。<code>SELECT * FROM A INNER JOIN B ON A.BOOK_ID = B.BOOK_ID;</code></li>
+<li>左连接（left join）返回两张表匹配的记录，以及表 A 多余的记录。<code>SELECT * FROM A LEFT JOIN B ON A.BOOK_ID = B.BOOK_ID;</code></li>
+<li>右连接（right join）返回两张表匹配的记录，以及表 B 多余的记录。<code>SELECT * FROM A RIGHT JOIN B ON A.BOOK_ID = B.BOOK_ID;</code></li>
+<li>全连接（full join）返回匹配的记录，以及表 A 和表 B 各自的多余记录。<code>SELECT * FROM A FULL JOIN B ON A.BOOK_ID = B.BOOK_ID;</code><br><img src="https://raccoonxiaoxin.github.io/InnerSences/post-images/1550745445185.jpeg" alt=""><br>上面的 SQL 语句还可以加上 WHERE 条件从句，对记录进行筛选，比如只返回表 A 里面不匹配表 B 的记录。<br><code>SELECT * FROM A LEFT JOIN B ON A.BOOK_ID = B.BOOK_ID WHERE B.ID IS NULL;</code><br><code>SELECT * FROM A LEFT JOIN B ON A.BOOK_ID = B.BOOK_ID WHERE A.ID IS NULL OR B.ID IS NULL;</code></li>
+</ul>
+<p>此外，还存在一种特殊的连接，叫做 &quot;交叉连接&quot;（cross join），指的是表 A 和表 B 不存在关联字段，这时表 A（共有 n 条记录）与表 B （共有 m 条记录）连接后，会产生一张包含 n x m 条记录的新表，也就是表记录的笛卡尔乘积。<br><img src="https://raccoonxiaoxin.github.io/InnerSences/post-images/1550745780406.png" alt=""></p>
+
+            </div>
+          </article>
+        </div>
+    
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://raccoonxiaoxin.github.io/InnerSences/post/dns">
+              <h3 class="post-title">
+                DNS
+              </h3>
+            </a>
+          </div>  
+        
+
+        
+    
+        <div class="site-footer">
+  Designed & Writen by <b>Raccoon</b>
+<br />Powered by Hve Notes
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+      </div>
+    </div>
+  </body>
+</html>
