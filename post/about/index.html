@@ -14,9 +14,9 @@
 
 
   
-
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
   
-    <link rel="stylesheet" href="https://unpkg.com/disqusjs@1.1/dist/disqusjs.css" />
+
   
 
 
@@ -97,9 +97,9 @@
 
             
               
-
+                <div id="gitalk-container" data-aos="fade-in"></div>
               
-                <div id="disqus_thread" data-aos="fade-in"></div>
+
               
             
 
@@ -129,21 +129,24 @@ var app = new Vue({
 
   
   
-
-  
-    <script src="https://unpkg.com/disqusjs@1.1/dist/disqus.js"></script>
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
     <script>
 
-    var options = {
-      shortname: 'raccoonxin',
-      apikey: 'ZxbB5N9SCSPr1vBNveyzFBGwINZWv3JOgSQqellx38yemJP6Zv3CAwjuJIvIMb8n',
-    }
-    if ('') {
-      options.api = ''
-    }
-    var dsqjs = new DisqusJS(options)
+      var gitalk = new Gitalk({
+        clientID: '8f6be1f2c108129b7a25',
+        clientSecret: '2f1d4ec6a9edbcabb493364e509b690a45822df4',
+        repo: 'https://raccoonxiaoxin.github.io/InnerSences',
+        owner: 'RaccoonXiaoxin',
+        admin: ['RaccoonXiaoxin'],
+        id: location.pathname,      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
 
     </script>
+  
+
   
 
 
