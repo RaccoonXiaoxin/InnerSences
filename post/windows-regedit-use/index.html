@@ -1,0 +1,200 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Windows 注册表的日常使用 | Raccoon&#39;s Inner Sences</title>
+<link rel="shortcut icon" href="https://raccoonxiaoxin.github.io/InnerSences/favicon.ico">
+<link rel="stylesheet" href="https://raccoonxiaoxin.github.io/InnerSences/styles/main.css">
+
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+
+
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://raccoonxiaoxin.github.io/InnerSences">
+  <img class="avatar" src="https://raccoonxiaoxin.github.io/InnerSences/images/avatar.png" alt="" width="80px" height="80px">
+  </a>
+  <h1 class="site-title">
+    Raccoon&#39;s Inner Sences
+  </h1>
+  <p class="site-description">
+    <h4>我日常看到的一些内容和自己的一些想法</h4>
+</br>
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="https://raccoonxiaoxin.github.io/InnerSences" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="https://raccoonxiaoxin.github.io/InnerSences/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="https://raccoonxiaoxin.github.io/InnerSences/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="https://raccoonxiaoxin.github.io/InnerSences/post/about/" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+</div>
+
+      
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              Windows 注册表的日常使用
+            </h2>
+            <div class="post-info">
+              <time class="post-time">
+                · 2019-03-11 ·
+              </time>
+              
+                <a href="https://raccoonxiaoxin.github.io/InnerSences/tag/windows" class="post-tags">
+                  # Windows
+                </a>
+              
+            </div>
+            <div class="post-content">
+              <p>&emsp;&emsp;日常使用 Windows 系统，注册表是个无法跳过的内容，本文将介绍下注册表的基本使用，着重讲解下命令行模式下如何进行注册表添加、删除、查看等操作。</p>
+<!-- more -->
+<h3 id="零、引言"><strong>零、引言</strong></h3><p>&emsp;&emsp;Windows 系统的注册表相当于系统级配置信息数据库 ，大部分系统设置和软件配置信息都放在注册表里面，而注册表的破坏严重时可能直接导致 Windows 系统的崩溃，因此，在着手修改注册表之前记得做好备份，方便操作错误时恢复注册表。<br>&emsp;&emsp;注册表编辑器 reg.exe，一般位于系统盘的 C:\Windows\System32\reg.exe 。</p>
+<h3 id="一、图形化注册表编辑器"><strong>一、图形化注册表编辑器</strong></h3><p>&emsp;&emsp;图形化注册表编辑器的打开方式有三种：</p>
+<ol>
+<li>开始菜单，直接搜索“regedit”或“注册表编辑器”</li>
+<li>运行 界面，输入“regedit”</li>
+<li>命令行 界面，输入“regedit”</li>
+</ol>
+<p>&emsp;&emsp;图形化注册表编辑器的界面如下图，键、值和类型三个名词就是分别表示对应位置的内容。<br><img src="https://raccoonxiaoxin.github.io/InnerSences/post-images/1552372580653.png" alt=""><br>备份操作在上方的菜单，文件--导出</p>
+<h3 id="二、命令行注册表编辑器"><strong>二、命令行注册表编辑器</strong></h3><p>&emsp;&emsp;实际上图形界面的注册表编辑器可以完成所有注册表编辑操作，在日常的 Windows 使用过程中都可以满足修改注册表的需要。但有时并没有图形界面，比如只有一个 shell，这时想修改注册表的值，就必须使用命令行注册表编辑器了。<br>要调用 &quot;控制台注册表编辑器&quot; 只需要打开 CMD 命令行，输入 &quot;reg /?&quot; 就能看到帮助文件了。<br><img src="https://raccoonxiaoxin.github.io/InnerSences/post-images/1552373165683.png" alt=""><br>命令行本身不区分大小写。</p>
+<h3 id="三、常用的使用和相关操作"><strong>三、常用的使用和相关操作</strong></h3><ol>
+<li><p>调整 Windows 10「菜单」视觉效果显示速度延迟<br>Windows 10 系统中有一系列的动画视觉效果，能够让用户的 UI 体验更加流畅，其中一项就包括打开菜单时的平滑过渡延迟效果。对绝大多数用户来说，系统默认设置都是比较理想的，不过您还是可以进一步加速菜单视觉效果延迟，让其感觉起来更加快速。</p>
+<pre><code>HKEY_CURRENT_USER\Control Panel\Desktop</code></pre><p>修改右侧 MenuShowDelay 键值，默认是 400 毫秒。<br>若要加快动画速度，使用小于 400 的数值，如 75、100 或 125 等，值设置为 0 时，将完全禁用菜单视觉效果。<br>若要减慢动画效果速度，请使用大于 400 的值，但最大不超过 4000。<br>值设置好后重启计算机即可查看到效果。</p>
+</li>
+<li><p>关闭 Windows 10 两分钟后自动进入睡眠<br>Windows 10 系统为了能够让轻薄本进一步增强续航，增加了一个隐藏的电源管理项，2 分钟如果没有操作系统将会自动进入休眠状态。这对于台式机或者连着电源使用的笔记本并没有太大的意义，可以通过如下的方式进行修改。</p>
+<pre><code>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\238C9FA8-0AAD-41ED-83F4-97BE242C8F20\7bc4a2f9-d8fc-4469-b07b-33eb785aaca0</code></pre><p>修改右侧 Attributes 键值，将数值数据由默认值 1 修改为 2 ，确定。<br>电源选项中的 “更改高级电源设置” 即可打开 “电源选项 - 高级设置” 窗口。点击 + 号展开 “睡眠”，即可看到“无人参与系统睡眠超时” 设置项，默认 2 分钟修改为一个较大的数值，起码不小于你在 “Windows 设置 － 系统 － 电源和睡眠” 设置的睡眠超时时间即可。</p>
+</li>
+<li><p>Windows 10 内测版本改为“跳到下一个 Windows 版本”<br>选择参加 Windows 预览体验计划的用户，会发现“跳过”选项无法勾选，那是因为微软本身针对跳到最新大版本测试下有着严格的筛选，不满足要求的用户就无法勾选，但是可以通过修改注册表来实现。</p>
+<pre><code>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsSelfHost\Applicability</code></pre><p>右侧 ContentType 的键值从 Active 改成 Skip<br>更改后再检查更新就会收到下一个版本的更新了，更新安装好后重启完成，也可以看到“跳过”选项可以正常使用了。</p>
+</li>
+<li><p>远程桌面记录的管理</p>
+<pre><code>HKEY_CURRENT_USER\Software\Microsoft\Terminal Server Client\Default</code></pre><p>右侧的值都是连接过的远程桌面 IP 地址，可以自行将不需要的删除掉，这样远程桌面的下拉菜单中就没有对应的记录了</p>
+</li>
+<li><p>恢复照片查看器打开图片文件<br>笔者一直很喜欢 Windows 7 时代的照片查看器，对于 Windows 10 上自带的照片应用始终用着不顺手，可以直接命令行执行下述的内容</p>
+<pre><code>reg add &quot;HKLM\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations&quot; /v &quot;.jpg&quot; /t REG_SZ /d PhotoViewer.FileAssoc.Tiff /f
+reg add &quot;HKLM\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations&quot; /v &quot;.jpeg&quot; /t REG_SZ /d PhotoViewer.FileAssoc.Tiff /f
+reg add &quot;HKLM\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations&quot; /v &quot;.bmp&quot; /t REG_SZ /d PhotoViewer.FileAssoc.Tiff /f
+reg add &quot;HKLM\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations&quot; /v &quot;.png&quot; /t REG_SZ /d PhotoViewer.FileAssoc.Tiff /f
+reg add &quot;HKLM\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations&quot; /v &quot;.cr2&quot; /t REG_SZ /d PhotoViewer.FileAssoc.Tiff /f
+reg add &quot;HKLM\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations&quot; /v &quot;.jpg_large&quot; /t REG_SZ /d PhotoViewer.FileAssoc.Tiff /f</code></pre><p>其他图片类型可以类似增加</p>
+</li>
+<li><p>恢复音量合成器旧版样式<br>Windows 10 新版音量合成器修改起来有些困难，想要恢复旧版的样式可以如下修改</p>
+<pre><code>reg add &quot;HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\MTCUVC&quot;
+reg add &quot;HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\MTCUVC&quot; /v EnableMTCUVC /t REG_DWORD /d 0</code></pre></li>
+<li><p>删除“此电脑”主界面和弹窗选择界面上方的快捷方式<br>Windows 10 的设计理念是好的，为了方便大家日常使用，所以把一些诸如视频、图片、音乐等快捷方式放在了此电脑的界面最上方，但是整个界面就显得有些混乱了。可以通过如下修改来恢复简洁的样式。</p>
+<pre><code>::此电脑 打开后上方的文件夹
+REG DELETE HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{088e3905-0323-4b02-9826-5d99428e115f} /F
+REG DELETE HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A} /F
+REG DELETE HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{1CF1260C-4DD0-4ebb-811F-33C572699FDE} /F
+REG DELETE HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{24ad3ad4-a569-4530-98e1-ab02f9417aa8} /F
+REG DELETE HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{374DE290-123F-4565-9164-39C4925E467B} /F
+REG DELETE HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{3ADD1653-EB32-4cb0-BBD7-DFA0ABB5ACCA} /F
+REG DELETE HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{3dfdf296-dbec-4fb4-81d1-6a3438bcf4de} /F
+REG DELETE HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{A0953C92-50DC-43bf-BE83-3742FED03C9C} /F
+REG DELETE HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{A8CDFF1C-4878-43be-B5FD-F8091C1C60D0} /F
+REG DELETE HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641} /F
+REG DELETE HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{d3162b92-9365-467a-956b-92703aca08af} /F
+REG DELETE HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{f86fa3ab-70d2-4fc7-9c99-fcbf05467f3a} /F
+REG DELETE HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{814A7798-63FB-42A6-BD9C-EDE1843A0106} /F
+::选择文件路径的弹窗界面
+REG DELETE HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{088e3905-0323-4b02-9826-5d99428e115f} /F
+REG DELETE HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A} /F
+REG DELETE HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{1CF1260C-4DD0-4ebb-811F-33C572699FDE} /F
+REG DELETE HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{24ad3ad4-a569-4530-98e1-ab02f9417aa8} /F
+REG DELETE HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{374DE290-123F-4565-9164-39C4925E467B} /F
+REG DELETE HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{3ADD1653-EB32-4cb0-BBD7-DFA0ABB5ACCA} /F
+REG DELETE HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{3dfdf296-dbec-4fb4-81d1-6a3438bcf4de} /F
+REG DELETE HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{A0953C92-50DC-43bf-BE83-3742FED03C9C} /F
+REG DELETE HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{A8CDFF1C-4878-43be-B5FD-F8091C1C60D0} /F
+REG DELETE HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641} /F
+REG DELETE HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{d3162b92-9365-467a-956b-92703aca08af} /F
+REG DELETE HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{f86fa3ab-70d2-4fc7-9c99-fcbf05467f3a} /F
+REG DELETE HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{814A7798-63FB-42A6-BD9C-EDE1843A0106} /F
+REG DELETE HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{A3597333-B5F3-4CB0-9C11-562672709357} /F</code></pre></li>
+<li><p>关闭 Windows 10 默认 C 盘保留 7 GB 空间用于更新<br>Windows 10 增加了一个磁盘空间的控制，C 盘会在默认情况下保留了 7 GB 的空间用于系统升级，这本身是个好事，避免因为 C 盘空间不足导致整个系统在升级过程中卡死而只能格式化重装。但是对于小硬盘的用户来说，本来就只有一点点大小空间的 C 盘，7 GB 还不允许使用，简直就是灾难了。</p>
+<pre><code>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\ReserveManager</code></pre><p>右侧 ShippedWithReserves 的键值从 0 改成 1</p>
+</li>
+</ol>
+
+            </div>
+          </article>
+        </div>
+    
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://raccoonxiaoxin.github.io/InnerSences/post/kindle-basic-use">
+              <h3 class="post-title">
+                Kindle 的基本使用
+              </h3>
+            </a>
+          </div>  
+        
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '8f6be1f2c108129b7a25',
+    clientSecret: '2f1d4ec6a9edbcabb493364e509b690a45822df4',
+    repo: 'InnerSences',
+    owner: 'RaccoonXiaoxin',
+    admin: ['RaccoonXiaoxin'],
+    id: location.pathname,      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+    
+        <div class="site-footer">
+  Designed & Writen by <a href="https://github.com/RaccoonXiaoxin" style="font-weight: bold">Raccoon</a>
+<br />Powered by Hve Notes
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+      </div>
+    </div>
+  </body>
+</html>
